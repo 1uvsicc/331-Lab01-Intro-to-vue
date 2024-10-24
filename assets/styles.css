@@ -39,10 +39,12 @@ body {
   border: 2px solid #d8d8d8;
   border-radius: 50%;
 }
-
+.out-of-stock-image {
+  filter: grayscale(100%);
+}
 
 .disabledButton {
-  background-color: #d8d8d8;
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
