@@ -39,7 +39,7 @@ body {
   border: 2px solid #d8d8d8;
   border-radius: 50%;
 }
-.out-of-stock-image {
+.grayscale {
   filter: grayscale(100%);
 }
 

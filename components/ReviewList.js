@@ -11,13 +11,15 @@ const reviewList = {
             <br/>
             "{{ review.review }}"
             <br/>
+            "recommendation" :{{ review.recommendation }}
         </li>
         </ul>
     </div>
         `
     ,props: {
         reviews: {
-            type: Array
+            type: Array,
+            required:true
         }
     },
     setup(props){

@@ -34,7 +34,7 @@ const app = createApp({
             premium,
             updateCart,
             handleRemoveFromCart,
-            
+          
             
         }
     }
@@ -44,4 +44,5 @@ const app = createApp({
 app.component('product-display', productDisplay)
 app.component('review-form', reviewForm)
 app.component('review-list',reviewList)
+app.component('product-details',productDetails)
 app.mount('#app')

@@ -6,7 +6,8 @@ const productDisplay = {
     <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
-                    <img :src="image">
+                    <!--<img :src="image">-->
+                    <img :src="image" :class="{ grayscale: !inStock }" alt="Product Image">
                 </div>
             </div>
             <div class="product-info">
@@ -15,6 +16,8 @@ const productDisplay = {
                 <h1>{{title}}</h1>
                 </a>
                 <div>{{ ba }}</div>
+              <!--<img v-if="inStock" src="./assets/images/socks_green.jpg" alt="In Stock">-->
+              <!--<img v-else src="./assets/images/socks_green.jpg" alt="Out of Stock" class="grayscale">-->
                 <p v-if="inventory > 10">In Stock</p>
                 
                 <p v-else-if="inventory <= 10 && inventory > 0">Almost out of Stock</p>
@@ -25,9 +28,10 @@ const productDisplay = {
                 <p v-if="onSale">{{saleMessage}}</p>
                 <p>Shipping: {{shipping}}</p>
                 <ul>
-                    <li v-for="detail in details">{{detail}}</li>
+                   <!--<li v-for="detail in details">{{detail}}</li>-->
                 </ul>
                 <ul>
+                <product-details :details="productDetailsData"></product-details>
                   <p>size:</p>
                     <li v-for="size in size">{{size}}</li>
                 </ul>
@@ -41,7 +45,9 @@ const productDisplay = {
             </div>
             <review-list v-if="reviews.length" :reviews="reviews"></review-list>
             <review-form @review-submitted="addReview"></review-form>
+            <review-list :reviews="reviews"></review-list>
             <button @click="removeFromCart">Remove from Cart</button>            
+
 
         </div>
        
@@ -72,18 +78,18 @@ const productDisplay = {
         
         // const image = ref('./assets/images/socks_green.jpg')
         // const inStock = ref(true)
-        const inventory = ref(100)
+        const inventory = ref(1)
         const size = ref([
             
             'L',
             'M',
             'S'
         ])
-        const details = ref([
-            '50% cotton',
-            '30% wool',
-            '20% polyester'
-        ])
+        //const details = ref([
+            //'50% cotton',
+            //'30% wool',
+            //'20% polyester'
+        //])
         const variants = ref([
             { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
             { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 }
@@ -97,7 +103,8 @@ const productDisplay = {
             return variants.value[selectedVariant.value].image
         })
         const inStock = computed(() => {
-            return variants.value[selectedVariant.value].quantity
+           return variants.value[selectedVariant.value].quantity
+           //return inventory.value > 10;
         })
         function addToCart() {
             //cart.value += 1
@@ -137,7 +144,7 @@ const productDisplay = {
         return {
             
             product,
-           ba,
+            ba,
             producturl,
             reviews,
             addReview,
@@ -149,7 +156,7 @@ const productDisplay = {
             inStock,
             size,
             inventory,
-            details,
+           // details,
             variants,
             addToCart,
             updateImage,
@@ -157,7 +164,12 @@ const productDisplay = {
             shipping,
             removeFromCart,
             toggleStockStatus,
-            inStockVariant
+            inStockVariant,
+            productDetailsData: [
+                '50% cotton',
+                '30% wool',
+                '20% polyester'
+              ]
             
         }
     }

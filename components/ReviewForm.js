@@ -17,17 +17,26 @@ const reviewForm = {
         <option>2</option>
         <option>1</option>
       </select>
-  
+     <label>Would you recommend this product?</label>
+      <div>
+        <label>
+          <input type="radio" value="Yes" v-model="recommendation"> Yes
+        </label>
+        <label>
+          <input type="radio" value="No" v-model="recommendation"> No
+        </label>
+      </div>
       <input class="button" type="submit" value="Submit">
     </form>`,
     setup(props,{emit}) {
         const form = reactive({
             name: '',
             review: '',
-            rating: null
+            rating: null,
+            recommendation: null
         })
         function onSubmit(){
-            if (form.name === '' || form.review === '' || form.rating === null){
+            if (form.name === '' || form.review === '' || form.rating === null || form.recommendation === null){
                 alert('Review is incomplete. Please fill out every field.')
                 return
                 }
@@ -35,12 +44,14 @@ const reviewForm = {
             const productReview = {
             name: form.name,
             review: form.review,
-            ating: form.rating
+            ating: form.rating,
+            recommendation: form.recommendation
             }
             emit('review-submitted', productReview)
             form.name = ''
             form.review = ''
             form.rating = null
+            form.recommendation = null
              }
             
         return {
